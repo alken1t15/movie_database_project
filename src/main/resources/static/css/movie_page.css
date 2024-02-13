@@ -1,0 +1,16 @@
+.first_section_block_inner{
+    display:  flex;
+    align-items: baseline;
+}
+.first_section_block_inner_text{
+    min-width:  131px;
+}
+.first_section_block_inner_input{
+    margin-left: 150px;
+    width: 2000px;
+    height: 30px;
+    margin-top: 20px;
+}
+.button_find{
+    margin-top: 20px;
+}

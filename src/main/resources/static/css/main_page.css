@@ -1,0 +1,23 @@
+.first_block{
+    display:  flex;
+}
+.body_block{
+    padding: 50px 200px;
+}
+.first_block_text{
+    margin-top: 150px;
+    margin-left: 50px;
+    font-size: 70px;
+}
+.second_block{
+    margin-top: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 550px;
+    padding-right: 550px;
+}
+.footer_block{
+    text-align: center;
+    margin-top: 220px;
+}
