@@ -14,3 +14,48 @@
 .button_find{
     margin-top: 20px;
 }
+
+/*MENU cards*/
+
+.menu__cards{
+    padding: 30px 0 60px;
+}
+
+
+.menu__cards-inner{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.menu__cards-item{
+    max-width: 235px;
+    width: 100%;
+}
+
+.menu__cards-img img{
+    width: 100%;
+}
+
+.menu__cards-item-box{
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.menu__cards__box-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 5px;
+}
+
+.menu__cards-text{
+    text-align: center;
+}
+
+
+
