@@ -56,6 +56,18 @@
 .menu__cards-text{
     text-align: center;
 }
-
-
-
+.block_text_age{
+    display: flex;
+}
+.second_section_block_inner_input{
+    margin-left: 150px;
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+}
+.third_section_block_inner_input{
+    margin-left: 40px;
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+}
