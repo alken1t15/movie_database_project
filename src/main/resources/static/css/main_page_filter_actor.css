@@ -1,0 +1,12 @@
+.inner_block_b{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+}
+.inner_block{
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 50px;
+    justify-content: center;
+}
