@@ -7,27 +7,16 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "movie")
+@Table(name = "director")
 @Getter
 @Setter
-public class Movie {
+public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
 
-    private int year;
-
-    private String genre;
-
-    private double rating;
-
-    private int count;
-
-    @OneToMany(mappedBy = "movie")
-    private List<Actor> actors;
-
-    @OneToMany(mappedBy = "movie")
-    private List<Director> directors;
+    @ManyToMany(mappedBy = "roles")
+    private List<Users> users;
 }
