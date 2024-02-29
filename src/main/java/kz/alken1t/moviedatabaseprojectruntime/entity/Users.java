@@ -21,7 +21,7 @@ public class Users {
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "user_roles",
+    @JoinTable(name = "users_role",
     joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )

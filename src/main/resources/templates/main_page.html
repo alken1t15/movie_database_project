@@ -8,11 +8,11 @@
 <body class="body_block">
 <header>
     <div class="first_block">
-        <img src="/static/img/logo.png" alt="logo">
+        <img th:src="@{/img/logo.png}" alt="logo">
         <h1 class="first_block_text" >Movie Database Sample</h1>
     </div>
     <div class="second_block">
-        <a href="">Фильмы</a>
+        <a th:href="@{/movie/}">Фильмы</a>
         <a href="">Актеры</a>
         <a href="">Режиссеры</a>
         <a href="">Топ-10</a>

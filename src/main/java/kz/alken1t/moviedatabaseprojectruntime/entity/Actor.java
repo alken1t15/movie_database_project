@@ -20,6 +20,6 @@ public class Actor {
     private String surname;
 
     @ManyToOne
-    @Column(name = "movie_id")
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 }
