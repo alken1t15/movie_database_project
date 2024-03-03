@@ -1,12 +1,12 @@
 package kz.alken1t.moviedatabaseprojectruntime.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class FilterMovie {
     private String name;
     private Integer yearStart;
@@ -14,4 +14,6 @@ public class FilterMovie {
     private Double rating;
     private String nameActor;
     private String nameDirector;
+    private Integer startPage;
+    private Integer endPage;
 }

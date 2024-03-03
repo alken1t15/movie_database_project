@@ -1,5 +1,6 @@
 package kz.alken1t.moviedatabaseprojectruntime.controller;
 
+import kz.alken1t.moviedatabaseprojectruntime.dto.FilterClass;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterMovie;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Movie;
 import kz.alken1t.moviedatabaseprojectruntime.service.ServiceMovie;
@@ -22,12 +23,17 @@ public class MoviePageController {
     @GetMapping("/")
     public String getMoviePage(@RequestParam(required = false) String name,
                                @RequestParam(required = false) Integer yearStart,
-                               @RequestParam(required = false)  Integer yearEnd,
-                               @RequestParam(required = false)  Double rating,
+                               @RequestParam(required = false) Integer yearEnd,
+                               @RequestParam(required = false) Double rating,
                                @RequestParam(required = false) String nameActor,
-                               @RequestParam(required = false)  String nameDirector, Model model){
-        List<Movie> movies = serviceMovie.getMoviesList(name,yearStart,yearEnd,rating,nameActor,nameDirector);
-        model.addAttribute("movies",movies);
+                               @RequestParam(required = false) String nameDirector,
+                               @RequestParam(required = false) Integer start,
+                               @RequestParam(required = false) Integer end,
+                               @RequestParam(required = false) String page,Model model) {
+
+        FilterClass filterClass = serviceMovie.getMoviesList(name, yearStart, yearEnd, rating, nameActor, nameDirector,start,end,page);
+        model.addAttribute("movies", filterClass.getMovies());
+        model.addAttribute("filterPage", filterClass.getFilterMovie());
         return "movie_page";
     }
 }
