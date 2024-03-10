@@ -4,6 +4,7 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
+import jakarta.servlet.http.HttpSession;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterClass;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterMovie;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Actor;
@@ -11,11 +12,8 @@ import kz.alken1t.moviedatabaseprojectruntime.entity.Director;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Movie;
 import kz.alken1t.moviedatabaseprojectruntime.repository.RepositoryMovie;
 import lombok.AllArgsConstructor;
-import org.hibernate.SessionFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class ServiceMovie {
     private final EntityManager entityManager;
 
 
-    public FilterClass getMoviesList(String name, Integer yearStart, Integer yearEnd, Double rating, String nameActor, String nameDirector, Integer startPage, Integer endPage, String page) {
+    public FilterClass getMoviesList(String name, Integer yearStart, Integer yearEnd, Double rating, String nameActor, String nameDirector, Integer startPage, Integer endPage, String page, HttpSession httpSession) {
         FilterClass filterClass = new FilterClass();
         List<Predicate> predicates = new ArrayList<>();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -125,5 +123,13 @@ public class ServiceMovie {
         filterClass.setMovies(subList);
 
         return filterClass;
+    }
+
+    public Movie findById(Long id){
+        return repositoryMovie.findById(id).orElseThrow();
+    }
+
+    public void remove(String id) {
+        repositoryMovie.deleteById(Long.valueOf(id));
     }
 }

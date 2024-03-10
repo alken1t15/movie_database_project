@@ -1,5 +1,6 @@
 package kz.alken1t.moviedatabaseprojectruntime.controller;
 
+import jakarta.servlet.http.HttpSession;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterClass;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterMovie;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Movie;
@@ -29,9 +30,9 @@ public class MoviePageController {
                                @RequestParam(required = false) String nameDirector,
                                @RequestParam(required = false) Integer start,
                                @RequestParam(required = false) Integer end,
-                               @RequestParam(required = false) String page,Model model) {
+                               @RequestParam(required = false) String page, Model model, HttpSession httpSession) {
 
-        FilterClass filterClass = serviceMovie.getMoviesList(name, yearStart, yearEnd, rating, nameActor, nameDirector,start,end,page);
+        FilterClass filterClass = serviceMovie.getMoviesList(name, yearStart, yearEnd, rating, nameActor, nameDirector,start,end,page, httpSession);
         model.addAttribute("movies", filterClass.getMovies());
         model.addAttribute("filterPage", filterClass.getFilterMovie());
         return "movie_page";

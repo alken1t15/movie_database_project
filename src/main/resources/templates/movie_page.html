@@ -58,7 +58,7 @@
                 </div>
                 <div class="menu__cards-item-box">
                     <h6 class="menu__cards-title" th:text="${movie.name}">2013</h6>
-                    <button type="button" class="btn btn-outline-primary">Подробнее</button>
+                    <a th:href="@{/detail/{id}(id=${movie.id})}" class="btn btn-outline-primary">Подробнее</a>
                 </div>
             </div>
         </div>
