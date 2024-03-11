@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.*;
 import jakarta.servlet.http.HttpSession;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterClass;
 import kz.alken1t.moviedatabaseprojectruntime.dto.FilterMovie;
+import kz.alken1t.moviedatabaseprojectruntime.dto.MovieEdit;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Actor;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Director;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Movie;
@@ -131,5 +132,14 @@ public class ServiceMovie {
 
     public void remove(String id) {
         repositoryMovie.deleteById(Long.valueOf(id));
+    }
+
+    public void editMovie(MovieEdit movieEdit) {
+        Movie movie = repositoryMovie.findById(movieEdit.getId()).orElseThrow();
+        movie.setName(movieEdit.getName());
+        movie.setYear(movieEdit.getYear());
+        movie.setGenre(movieEdit.getGenre());
+        movie.setRating(movieEdit.getRating());
+        System.out.println(movieEdit);
     }
 }

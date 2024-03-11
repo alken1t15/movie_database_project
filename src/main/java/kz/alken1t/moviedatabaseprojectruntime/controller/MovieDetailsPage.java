@@ -1,5 +1,6 @@
 package kz.alken1t.moviedatabaseprojectruntime.controller;
 
+import kz.alken1t.moviedatabaseprojectruntime.dto.MovieEdit;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Movie;
 import kz.alken1t.moviedatabaseprojectruntime.service.ServiceMovie;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,19 @@ public class MovieDetailsPage {
     @PostMapping("/delete")
     public String removeRecord(@RequestParam(name = "id") String id){
         serviceMovie.remove(id);
+        return "redirect:/movie/";
+    }
+    @GetMapping("/edit/{id}")
+    public String getEditPage(@PathVariable(name = "id") Long id, Model model){
+        Movie movie = serviceMovie.findById(id);
+        model.addAttribute("movie",movie);
+        return "movie_details_edit_page";
+    }
+
+    @PostMapping("/edit")
+    public String editRecord(@ModelAttribute MovieEdit movieEdit, Model model){
+        serviceMovie.editMovie(movieEdit);
+       // model.addAttribute("movie",movie);
         return "redirect:/movie/";
     }
 }
