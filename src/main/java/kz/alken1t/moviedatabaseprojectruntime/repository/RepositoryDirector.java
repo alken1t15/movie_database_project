@@ -4,4 +4,5 @@ import kz.alken1t.moviedatabaseprojectruntime.entity.Director;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RepositoryDirector extends JpaRepository<Director,Long> {
+    Director findByName(String name);
 }

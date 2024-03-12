@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <link rel="stylesheet" th:href="@{/css/main_page.css}">
-  <link rel="stylesheet" th:href="@{/css/movie_details_edit_page.css}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main_page.css}">
+    <link rel="stylesheet" th:href="@{/css/movie_details_edit_page.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <section class="section_block">
-  <form th:action="@{/detail/edit}" th:method="POST">
-    <input type="hidden" name="id" th:value="${movie.id}">
-  <img th:src="@{/img/images.jpeg}" alt="img">
-  <div class="block_text_input">
-    <p class="information_text">Название фильма:</p>
-    <input th:name="name" th:value="${movie.name}" class="block_text_input_input" type="text"  >
-  </div>
-  <div class="block_text_input">
-    <p class="information_text">Год идания:</p>
-    <input th:name="year" th:value="${movie.year}" class="block_text_input_input"  type="text"  >
-  </div>
-  <div class="block_text_input">
-    <p class="information_text">Жанры фильмов:</p>
-    <input th:name="genre" th:value="${movie.genre}" class="block_text_input_input" type="text"  >
-  </div>
-  <div class="block_text_input">
-    <p class="information_text">Рейтинг фильма:</p>
-    <input th:name="rating" th:value="${movie.rating}" class="block_text_input_input" type="text"  >
-  </div>
-  <div class="block_text_input">
-    <p class="information_text">Актеры:</p>
-    <input th:name="actors" class="block_text_input_input" th:each="actor : ${movie.actors}" th:value="${actor.name}" type="text">
-  </div>
-  <div class="block_text_input">
-    <p class="information_text">Режиссеры:</p>
-    <input th:name="directors" class="block_text_input_input" th:each="director : ${movie.directors}" th:value="${director.name}" type="text"  >
-  </div>
-  <button class="btn btn-primary" type="submit">Сохранить</button>
-</form>
+    <form th:action="@{/detail/edit}" th:method="POST">
+        <input type="hidden" name="id" th:value="${movie.id}">
+        <img th:src="@{/img/images.jpeg}" alt="img">
+        <div class="block_text_input">
+            <p class="information_text">Название фильма:</p>
+            <input th:name="name" th:value="${movie.name}" class="block_text_input_input" type="text">
+        </div>
+        <div class="block_text_input">
+            <p class="information_text">Год идания:</p>
+            <input th:name="year" th:value="${movie.year}" class="block_text_input_input" type="text">
+        </div>
+        <div class="block_text_input">
+            <p class="information_text">Жанры фильмов:</p>
+            <input th:name="genre" th:value="${movie.genre}" class="block_text_input_input" type="text">
+        </div>
+        <div class="block_text_input">
+            <p class="information_text">Рейтинг фильма:</p>
+            <input th:name="rating" th:value="${movie.rating}" class="block_text_input_input" type="text">
+        </div>
+        <div class="block_text_input">
+            <p class="information_text">Актеры:</p>
+            <div class="options">
+                <select th:name="actors" th:each="actorOne : ${movie.actors}">
+                    <option th:each="actor : ${actors}" th:selected="${actor.id == actorOne.id}" th:value="${actor.id}"
+                            th:text="${actor.name} + ' ' +  ${actor.surname}">2
+                    </option>
+                    <option value="-1">Удалить</option>
+                </select>
+                <select th:name="actors">
+                    <option th:each="actor : ${actors}"  th:value="${actor.id}" th:text="${actor.name} + ' ' +  ${actor.surname}">2</option>
+                    <option selected="selected" value="-1">Добавить</option>
+                </select>
+            </div>
+        </div>
+        <div class="block_text_input">
+            <p class="information_text">Режиссеры:</p>
+            <div class="options">
+                <select th:name="directors" th:each="directorOne : ${movie.directors}">
+                    <option th:each="director : ${directors}" th:selected="${director.id == directorOne.id}"
+                            th:value="${director.id}" th:text="${director.name} + ' ' +  ${director.surname}">2
+                    </option>
+                    <option value="-1">Удалить</option>
+                </select>
+                <select th:name="directors">
+                    <option th:each="director : ${directors}"  th:value="${director.id}" th:text="${director.name} + ' ' +  ${director.surname}">2</option>
+                    <option selected="selected" value="-1">Добавить</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+    </form>
 </section>
 
 <footer class="footer_block">
-  <p>Movie Database Sample, 2023</p>
+    <p>Movie Database Sample, 2023</p>
 </footer>
 </body>
 </html>

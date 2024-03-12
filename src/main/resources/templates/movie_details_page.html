@@ -26,8 +26,8 @@
   <p class="information_text"><spam>Год производиства: </spam> <span th:text="${movie.year}">2011</span></p>
   <p class="information_text"><spam>Рейтинг: </spam> <span th:text="${movie.rating}">8.1</span></p>
   <p class="information_text"><spam>Жарн: </spam> <span th:text="${movie.genre}">Adventure</span></p>
-  <p class="information_text"><spam>Режиссеры: </spam> <span th:each="director : ${movie.directors}" th:text="${director.name}">David Yates</span></p>
-  <p class="information_text"><spam>Актеры: </spam> <span th:each="actor : ${movie.actors}" th:text="${actor.name}">David Yates</span></p>
+  <p class="information_text"><spam>Режиссеры: </spam> <span th:each="director : ${movie.directors}" th:text="${director.name} + ' ' + ${director.surname}">David Yates</span></p>
+  <p class="information_text"><spam>Актеры: </spam> <span th:each="actor : ${movie.actors}" th:text="${actor.name} + ' ' + ${actor.surname}">David Yates</span></p>
   <div class="buttons">
     <a th:href="@{/movie/}" class="btn btn-primary" type="submit">Назад</a>
     <form th:action="@{/detail/delete}" th:method="POST">

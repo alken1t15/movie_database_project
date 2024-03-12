@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/main_page.css}">
+  <link rel="stylesheet" th:href="@{/css/actor_page.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="body_block">
+<header>
+  <div class="first_block">
+    <img th:src="@{/img/logo.png}" alt="logo">
+    <h1 class="first_block_text" >Movie Database Sample</h1>
+  </div>
+  <div class="second_block">
+    <a th:href="@{/movie/}">Фильмы</a>
+    <a th:href="@{/actor}">Актеры</a>
+    <a href="">Режиссеры</a>
+    <a href="">Топ-10</a>
+  </div>
+</header>
+<section class="container">
+  <p th:each="actor : ${actors}"><span th:text="${actor.name} + ' ' + ${actor.surname}"></span></p>
+</section>
+<div class="menu__cards__box-buttons">
+  <form th:action="@{/movie/}" th:method="GET">
+    <input type="hidden" name="page" value="-">
+    <button class="btn btn-outline-secondary" type="submit">Назад</button>
+  </form>
+  <form th:action="@{/movie/}" th:method="GET">
+    <input type="hidden" name="page" value="+">
+    <button class="btn btn-outline-secondary" type="submit">Вперед</button>
+  </form>
+</div>
+<footer class="footer_block">
+  <p>Movie Database Sample, 2023</p>
+</footer>
+</body>
+</html>

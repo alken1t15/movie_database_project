@@ -30,47 +30,54 @@
         <div class="first_section_block_inner">
             <p class="first_section_block_inner_text">Год издания</p>
             <div class="block_text_age">
-                <input th:value="${filterPage.getYearStart}" name="yearStart" class="second_section_block_inner_input" type="number">
-                <input th:value="${filterPage.getYearEnd()}" name="yearEnd" class="third_section_block_inner_input" type="number">
+                <input th:value="${filterPage.getYearStart}" name="yearStart" class="second_section_block_inner_input"
+                       type="number">
+                <input th:value="${filterPage.getYearEnd()}" name="yearEnd" class="third_section_block_inner_input"
+                       type="number">
             </div>
         </div>
         <div class="first_section_block_inner">
             <p class="first_section_block_inner_text">Рейтинг фильмов</p>
-            <input th:value="${filterPage.getRating()}" name="rating" class="first_section_block_inner_input" type="number">
+            <input th:value="${filterPage.getRating()}" name="rating" class="first_section_block_inner_input"
+                   type="number">
         </div>
         <div class="first_section_block_inner">
             <p class="first_section_block_inner_text">Актер</p>
-            <input th:value="${filterPage.getNameActor()}" name="nameActor" class="first_section_block_inner_input" type="text">
+            <input th:value="${filterPage.getNameActor()}" name="nameActor" class="first_section_block_inner_input"
+                   type="text">
         </div>
         <div class="first_section_block_inner">
             <p class="first_section_block_inner_text">Режиссер</p>
-            <input th:value="${filterPage.getNameDirector()}" name="nameDirector" class="first_section_block_inner_input" type="text">
+            <input th:value="${filterPage.getNameDirector()}" name="nameDirector"
+                   class="first_section_block_inner_input" type="text">
         </div>
         <button type="submit" class="btn btn-primary">Поиск</button>
     </section>
 </form>
-    <section class="menu__cards">
-        <div class="menu__cards-inner">
-            <div class="menu__cards-item" th:each="movie : ${movies}">
-                <div class="menu__cards-img">
-                    <img src="https://www.stuttgarter-zeitung.de/media.media.f044150a-cd67-4413-a95d-72e634240451.original1024.jpg"
-                         alt="img cards">
-                </div>
-                <div class="menu__cards-item-box">
-                    <h6 class="menu__cards-title" th:text="${movie.name}">2013</h6>
-                    <a th:href="@{/detail/{id}(id=${movie.id})}" class="btn btn-outline-primary">Подробнее</a>
-                </div>
+<section class="menu__cards">
+    <div class="menu__cards-inner">
+        <div class="menu__cards-item" th:each="movie : ${movies}">
+            <div class="menu__cards-img">
+                <img src="https://www.stuttgarter-zeitung.de/media.media.f044150a-cd67-4413-a95d-72e634240451.original1024.jpg"
+                     alt="img cards">
+            </div>
+            <div class="menu__cards-item-box">
+                <h6 class="menu__cards-title" th:text="${movie.name}">2013</h6>
+                <a th:href="@{/detail/{id}(id=${movie.id})}" class="btn btn-outline-primary">Подробнее</a>
             </div>
         </div>
-        <div class="menu__cards__box-buttons">
-            <input type="hidden" name="start" th:value="${filterPage.getStartPage()}">
-            <input type="hidden" name="end" th:value="${filterPage.getEndPage()}">
-            <input type="hidden" name="page" value="+">
+    </div>
+    <div class="menu__cards__box-buttons">
+        <form th:action="@{/movie/}" th:method="GET">
             <input type="hidden" name="page" value="-">
             <button class="btn btn-outline-secondary" type="submit">Назад</button>
+        </form>
+        <form th:action="@{/movie/}" th:method="GET">
+            <input type="hidden" name="page" value="+">
             <button class="btn btn-outline-secondary" type="submit">Вперед</button>
-        </div>
-        <p class="menu__cards-text">Movie Database Sample, 2023</p>
-    </section>
+        </form>
+    </div>
+    <p class="menu__cards-text">Movie Database Sample, 2023</p>
+</section>
 </body>
 </html>

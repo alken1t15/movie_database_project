@@ -1,18 +1,26 @@
 package kz.alken1t.moviedatabaseprojectruntime.controller;
 
 import kz.alken1t.moviedatabaseprojectruntime.dto.MovieEdit;
+import kz.alken1t.moviedatabaseprojectruntime.entity.Actor;
+import kz.alken1t.moviedatabaseprojectruntime.entity.Director;
 import kz.alken1t.moviedatabaseprojectruntime.entity.Movie;
+import kz.alken1t.moviedatabaseprojectruntime.service.ServiceActor;
+import kz.alken1t.moviedatabaseprojectruntime.service.ServiceDirector;
 import kz.alken1t.moviedatabaseprojectruntime.service.ServiceMovie;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/detail")
 @AllArgsConstructor
 public class MovieDetailsPage {
     private final ServiceMovie serviceMovie;
+    private final ServiceActor serviceActor;
+    private final ServiceDirector serviceDirector;
 
     @GetMapping("/{id}")
     public String getPage(@PathVariable(name = "id") Long id, Model model){
@@ -28,7 +36,11 @@ public class MovieDetailsPage {
     @GetMapping("/edit/{id}")
     public String getEditPage(@PathVariable(name = "id") Long id, Model model){
         Movie movie = serviceMovie.findById(id);
+        List<Actor> actorList = serviceActor.findAll();
+        List<Director> directorList = serviceDirector.findAll();
         model.addAttribute("movie",movie);
+        model.addAttribute("actors",actorList);
+        model.addAttribute("directors",directorList);
         return "movie_details_edit_page";
     }
 
