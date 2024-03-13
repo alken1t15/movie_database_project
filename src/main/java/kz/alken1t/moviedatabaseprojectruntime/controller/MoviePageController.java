@@ -30,7 +30,7 @@ public class MoviePageController {
                                @RequestParam(required = false) String nameDirector,
                                @RequestParam(required = false) String page, Model model, HttpSession httpSession) {
 
-        FilterClass filterClass = serviceMovie.getMoviesList(name, yearStart, yearEnd, rating, nameActor, nameDirector,page, httpSession);
+        FilterClass filterClass = serviceMovie.getMoviesList(name, yearStart, yearEnd, rating, nameActor, nameDirector, page, httpSession);
         model.addAttribute("movies", filterClass.getMovies());
         model.addAttribute("filterPage", filterClass.getFilterMovie());
         return "movie_page";

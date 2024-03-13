@@ -15,12 +15,16 @@ import kz.alken1t.moviedatabaseprojectruntime.repository.RepositoryActor;
 import kz.alken1t.moviedatabaseprojectruntime.repository.RepositoryDirector;
 import kz.alken1t.moviedatabaseprojectruntime.repository.RepositoryMovie;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -150,8 +154,6 @@ public class ServiceMovie {
                     subList = list.subList(startPage, temp2);
                 }
 
-                //size 54  page 60       temp = 60 - 54   6
-
             }
             FilterMovie filterMovie = new FilterMovie(name, yearStart, yearEnd, rating, nameActor, nameDirector, startPage, endPage);
             filterClass.setFilterMovie(filterMovie);
@@ -235,25 +237,38 @@ public class ServiceMovie {
         }
         repositoryMovie.save(movie);
 
-        for (String actorId : movieEdit.getActors()) {
-            if (Long.parseLong(actorId) < 0) {
-                continue;
+
+        if (movieEdit.getActors() !=null) {
+            if (!movieEdit.getActors().isEmpty()) {
+                for (String actorId : movieEdit.getActors()) {
+                    if (Long.parseLong(actorId) < 0) {
+                        continue;
+                    }
+                    Actor actor = repositoryActor.findById(Long.valueOf(actorId))
+                            .orElseThrow(() -> new IllegalArgumentException("Actor not found with id: " + actorId));
+                    actor.setMovie(movie);
+                    movie.getActors().add(actor);
+                }
             }
-            Actor actor = repositoryActor.findById(Long.valueOf(actorId))
-                    .orElseThrow(() -> new IllegalArgumentException("Actor not found with id: " + actorId));
-            actor.setMovie(movie);
-            movie.getActors().add(actor);
+        }
+        if (movieEdit.getDirectors() != null) {
+            if (!movieEdit.getDirectors().isEmpty()) {
+                for (String directorId : movieEdit.getDirectors()) {
+                    if (Long.parseLong(directorId) < 0) {
+                        continue;
+                    }
+                    Director director = repositoryDirector.findById(Long.valueOf(directorId))
+                            .orElseThrow(() -> new IllegalArgumentException("Director not found with id: " + directorId));
+                    director.setMovie(movie);
+                    movie.getDirectors().add(director);
+                }
+            }
         }
 
-        for (String directorId : movieEdit.getDirectors()) {
-            if (Long.parseLong(directorId) < 0) {
-                continue;
-            }
-            Director director = repositoryDirector.findById(Long.valueOf(directorId))
-                    .orElseThrow(() -> new IllegalArgumentException("Director not found with id: " + directorId));
-            director.setMovie(movie);
-            movie.getDirectors().add(director);
-        }
+    }
 
+    public List<Movie> findTop() {
+        List<Movie> movies = repositoryMovie.findAllByOrderByRatingDesc();
+        return movies.subList(0,10);
     }
 }

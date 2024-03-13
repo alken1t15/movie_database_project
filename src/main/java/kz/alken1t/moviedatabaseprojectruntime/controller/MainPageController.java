@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping({"/","/main"})
+@RequestMapping({"/", "/main"})
 @AllArgsConstructor
 public class MainPageController {
     RepositoryUsers repositoryUsers;
     PasswordEncoder passwordEncoder;
 
     @GetMapping
-    public String mainPage(){
+    public String mainPage() {
 //        Users users = new Users("alex", passwordEncoder.encode("alex"));
 //        repositoryUsers.save(users);
         return "main_page";

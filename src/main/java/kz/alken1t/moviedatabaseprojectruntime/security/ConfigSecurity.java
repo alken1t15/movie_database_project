@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ConfigSecurity {
 
     @Bean
-   public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -19,9 +19,10 @@ public class ConfigSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/detail/delete","/detail/edit/*","/detail/edit").authenticated()
+                    auth.requestMatchers("/detail/delete", "/detail/edit/*", "/detail/edit").authenticated()
                             .anyRequest().permitAll();
-                }).formLogin(form -> {});
+                }).formLogin(form -> {
+                });
         return http.build();
     }
 }

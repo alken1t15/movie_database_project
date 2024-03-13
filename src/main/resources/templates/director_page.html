@@ -22,14 +22,14 @@
   </div>
 </header>
 <section class="container">
-  <p th:each="actor : ${actors}"><span th:text="${actor.name} + ' ' + ${actor.surname}"></span></p>
+  <p th:each="director : ${directors}"><span th:text="${director.name} + ' ' + ${director.surname}"></span></p>
 </section>
 <div class="menu__cards__box-buttons">
-  <form th:action="@{/actor}" th:method="GET">
+  <form th:action="@{/director}" th:method="GET">
     <input type="hidden" name="page" value="-">
     <button class="btn btn-outline-secondary" type="submit">Назад</button>
   </form>
-  <form th:action="@{/actor}" th:method="GET">
+  <form th:action="@{/director}" th:method="GET">
     <input type="hidden" name="page" value="+">
     <button class="btn btn-outline-secondary" type="submit">Вперед</button>
   </form>

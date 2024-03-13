@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/main_page.css}">
+    <link rel="stylesheet" th:href="@{/css/best_movie_page.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body class="body_block">
 <header>
@@ -18,8 +21,9 @@
         <a th:href="@{/best}">Топ-10</a>
     </div>
 </header>
-<section>
-
+<section class="container">
+    <p th:each="movie : ${movies}"><span th:text="'Название: ' + ${movie.name} + ' Рейтинг: ' + ${movie.rating}"></span>
+    </p>
 </section>
 <footer class="footer_block">
     <p>Movie Database Sample, 2023</p>

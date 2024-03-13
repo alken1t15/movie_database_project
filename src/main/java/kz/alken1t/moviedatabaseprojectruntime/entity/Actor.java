@@ -2,6 +2,7 @@ package kz.alken1t.moviedatabaseprojectruntime.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Table(name = "actor")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +24,9 @@ public class Actor {
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
+
+    public Actor(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 }

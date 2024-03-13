@@ -21,6 +21,10 @@ public class ServiceActor {
     public List<Actor> findAll(String page, HttpSession httpSession) {
         List<Actor> actors = findAll();
 
+        if (page==null){
+            return actors.subList(0,20);
+        }
+
         if (httpSession.getAttribute("startPage") == null) {
             httpSession.setAttribute("startPage", 0);
             httpSession.setAttribute("endPage", 20);
@@ -58,8 +62,6 @@ public class ServiceActor {
             }
         else {
             if (actors.size() >= endPage) {
-                System.out.println(startPage);
-                System.out.println(endPage);
                 subList = actors.subList(startPage, endPage);
             } else {
                 int temp = endPage - actors.size();

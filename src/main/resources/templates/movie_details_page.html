@@ -11,13 +11,13 @@
 <header>
   <div class="first_block">
     <img th:src="@{/img/logo.png}" alt="logo">
-    <h1 class="first_block_text" >Movie Database Sample</h1>
+    <h1 class="first_block_text">Movie Database Sample</h1>
   </div>
   <div class="second_block">
-    <a href="">Фильмы</a>
-    <a href="">Актеры</a>
-    <a href="">Режиссеры</a>
-    <a href="">Топ-10</a>
+    <a th:href="@{/movie/}">Фильмы</a>
+    <a th:href="@{/actor}">Актеры</a>
+    <a th:href="@{/director}">Режиссеры</a>
+    <a th:href="@{/best}">Топ-10</a>
   </div>
 </header>
 <section class="section_block">
