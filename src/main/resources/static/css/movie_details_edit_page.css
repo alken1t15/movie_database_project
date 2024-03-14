@@ -3,7 +3,7 @@
 }
 .block_text_input{
     display:  flex;
-    align-items: center;
+    align-items: baseline;
 }
 .block_text_input_input{
     margin-left: 280px;
@@ -15,4 +15,10 @@
 }
 .options{
     margin-left: 280px;
+}
+.error_text{
+    margin-left: 24px;
+}
+.img_block{
+    margin-bottom: 8px;
 }

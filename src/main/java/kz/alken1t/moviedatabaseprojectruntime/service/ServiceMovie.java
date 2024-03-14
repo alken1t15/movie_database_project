@@ -35,25 +35,22 @@ public class ServiceMovie {
     private final RepositoryDirector repositoryDirector;
 
 
-    public FilterClass getMoviesList(String name, Integer yearStart, Integer yearEnd, Double rating, String nameActor, String nameDirector,  String page, HttpSession httpSession) {
+    public FilterClass getMoviesList(String name, Integer yearStart, Integer yearEnd, Double rating, String nameActor, String nameDirector, String page, HttpSession httpSession) {
         FilterClass filterClass = new FilterClass();
         List<Predicate> predicates = new ArrayList<>();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
 
-        if (httpSession.getAttribute("startPage")==null){
-            httpSession.setAttribute("startPage",0);
-            httpSession.setAttribute("endPage",20);
-            httpSession.setAttribute("name",name);
-            httpSession.setAttribute("yearStart",yearStart);
-            httpSession.setAttribute("yearEnd",yearEnd);
-            httpSession.setAttribute("rating",rating);
-            httpSession.setAttribute("nameActor",nameActor);
-            httpSession.setAttribute("nameDirector",nameDirector);
+        if (httpSession.getAttribute("startPage") == null) {
+            httpSession.setAttribute("startPage", 0);
+            httpSession.setAttribute("endPage", 20);
+            httpSession.setAttribute("name", name);
+            httpSession.setAttribute("yearStart", yearStart);
+            httpSession.setAttribute("yearEnd", yearEnd);
+            httpSession.setAttribute("rating", rating);
+            httpSession.setAttribute("nameActor", nameActor);
+            httpSession.setAttribute("nameDirector", nameDirector);
         }
-
-
-
 
         Root<Movie> movie = cq.from(Movie.class);
 
@@ -62,7 +59,6 @@ public class ServiceMovie {
         Join<Movie, Director> directorJoin = movie.join("directors");
 
         if (page != null) {
-            System.out.println(httpSession.getAttribute("startPage"));
             name = (String) httpSession.getAttribute("name");
             yearStart = (Integer) httpSession.getAttribute("yearStart");
             yearEnd = (Integer) httpSession.getAttribute("yearEnd");
@@ -71,36 +67,36 @@ public class ServiceMovie {
             nameDirector = (String) httpSession.getAttribute("nameDirector");
         }
 
-            if (!StringUtils.isBlank(name)) {
-                Predicate nameFilter = cb.like(movie.get("name"), "%" + name + "%");
-                predicates.add(nameFilter);
-            }
+        if (!StringUtils.isBlank(name)) {
+            Predicate nameFilter = cb.like(movie.get("name"), "%" + name + "%");
+            predicates.add(nameFilter);
+        }
 
-            if (yearStart != null && yearEnd != null) {
-                Predicate yearStartEndFilter = cb.between(movie.get("year"), yearStart, yearEnd);
-                predicates.add(yearStartEndFilter);
-            } else if (yearStart != null) {
-                Predicate yearStartFilter = cb.greaterThanOrEqualTo(movie.get("yearStart"), yearStart);
-                predicates.add(yearStartFilter);
-            } else if (yearEnd != null) {
-                Predicate yearEndFilter = cb.lessThanOrEqualTo(movie.get("yearEnd"), yearEnd);
-                predicates.add(yearEndFilter);
-            }
+        if (yearStart != null && yearEnd != null) {
+            Predicate yearStartEndFilter = cb.between(movie.get("year"), yearStart, yearEnd);
+            predicates.add(yearStartEndFilter);
+        } else if (yearStart != null) {
+            Predicate yearStartFilter = cb.greaterThanOrEqualTo(movie.get("yearStart"), yearStart);
+            predicates.add(yearStartFilter);
+        } else if (yearEnd != null) {
+            Predicate yearEndFilter = cb.lessThanOrEqualTo(movie.get("yearEnd"), yearEnd);
+            predicates.add(yearEndFilter);
+        }
 
-            if (rating != null) {
-                Predicate ratingFilter = cb.equal(movie.get("rating"), rating);
-                predicates.add(ratingFilter);
-            }
+        if (rating != null) {
+            Predicate ratingFilter = cb.equal(movie.get("rating"), rating);
+            predicates.add(ratingFilter);
+        }
 
-            if (!StringUtils.isBlank(nameActor)) {
-                Predicate nameActorFilter = cb.like(actorJoin.get("name"), "%" + nameActor + "%");
-                predicates.add(nameActorFilter);
-            }
+        if (!StringUtils.isBlank(nameActor)) {
+            Predicate nameActorFilter = cb.like(actorJoin.get("name"), "%" + nameActor + "%");
+            predicates.add(nameActorFilter);
+        }
 
-            if (!StringUtils.isBlank(nameDirector)) {
-                Predicate nameDirectorFilter = cb.like(directorJoin.get("name"), "%" + nameDirector + "%");
-                predicates.add(nameDirectorFilter);
-            }
+        if (!StringUtils.isBlank(nameDirector)) {
+            Predicate nameDirectorFilter = cb.like(directorJoin.get("name"), "%" + nameDirector + "%");
+            predicates.add(nameDirectorFilter);
+        }
 
 
         if (!predicates.isEmpty()) {
@@ -116,24 +112,23 @@ public class ServiceMovie {
 
             if (page != null && startPage != null) {
                 if (page.equals("+")) {
-                    if (startPage+20>list.size()){
+                    if (startPage + 20 > list.size()) {
 
-                    }else {
+                    } else {
                         startPage += 20;
                         endPage += 20;
                     }
                 } else {
-                    if (startPage-20<0){
+                    if (startPage - 20 < 0) {
 
-                    }else {
+                    } else {
                         startPage -= 20;
                         endPage -= 20;
                     }
                 }
             }
-            httpSession.setAttribute("startPage",startPage);
-            httpSession.setAttribute("endPage",endPage);
-
+            httpSession.setAttribute("startPage", startPage);
+            httpSession.setAttribute("endPage", endPage);
 
 
             List<Movie> subList;
@@ -145,8 +140,6 @@ public class ServiceMovie {
                 }
             else {
                 if (list.size() >= endPage) {
-                    System.out.println(startPage);
-                    System.out.println(endPage);
                     subList = list.subList(startPage, endPage);
                 } else {
                     int temp = endPage - list.size();
@@ -168,23 +161,23 @@ public class ServiceMovie {
 
         if (page != null && startPage != null) {
             if (page.equals("+")) {
-                if (startPage+20>list.size()){
+                if (startPage + 20 > list.size()) {
 
-                }else {
+                } else {
                     startPage += 20;
                     endPage += 20;
                 }
             } else {
-                if (startPage-20<0){
+                if (startPage - 20 < 0) {
 
-                }else {
+                } else {
                     startPage -= 20;
                     endPage -= 20;
                 }
             }
         }
-        httpSession.setAttribute("startPage",startPage);
-        httpSession.setAttribute("endPage",endPage);
+        httpSession.setAttribute("startPage", startPage);
+        httpSession.setAttribute("endPage", endPage);
 
 
         List<Movie> subList;
@@ -238,7 +231,7 @@ public class ServiceMovie {
         repositoryMovie.save(movie);
 
 
-        if (movieEdit.getActors() !=null) {
+        if (movieEdit.getActors() != null) {
             if (!movieEdit.getActors().isEmpty()) {
                 for (String actorId : movieEdit.getActors()) {
                     if (Long.parseLong(actorId) < 0) {
@@ -269,6 +262,6 @@ public class ServiceMovie {
 
     public List<Movie> findTop() {
         List<Movie> movies = repositoryMovie.findAllByOrderByRatingDesc();
-        return movies.subList(0,10);
+        return movies.subList(0, 10);
     }
 }

@@ -1,5 +1,8 @@
 package kz.alken1t.moviedatabaseprojectruntime.dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -24,6 +27,8 @@ public class MovieEdit {
     @NotEmpty
     private String genre;
     @NotNull
+    @Min(value = 0)
+    @Max(value = 10)
     private Double rating;
     private List<String> actors;
     private List<String> directors;

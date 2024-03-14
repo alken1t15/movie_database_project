@@ -12,26 +12,26 @@
 <section class="section_block">
     <form th:action="@{/detail/edit}" th:method="POST">
         <input type="hidden" name="id" th:value="${movie.id}">
-        <img th:src="@{/img/images.jpeg}" alt="img">
+        <img crossorigin="img_block" th:src="@{/img/images.jpeg}" alt="img">
         <div class="block_text_input">
             <p class="information_text">Название фильма:</p>
-            <p th:text="${#fields.hasErrors('movieEdit.name')}"  th:errors="${movieEdit.name}" class="information_text">Название фильма:</p>
             <input th:name="name" th:value="${movie.name}" class="block_text_input_input" type="text">
+            <p th:text="${#fields.hasErrors('movieEdit.name')}"  th:errors="${movieEdit.name}" class="error_text">Название фильма:</p>
         </div>
         <div class="block_text_input">
             <p class="information_text">Год издания:</p>
-            <p th:text="${#fields.hasErrors('movieEdit.year')}"  th:errors="${movieEdit.year}" class="information_text">Название фильма:</p>
             <input th:name="year" th:value="${movie.year}" class="block_text_input_input" type="text">
+            <p th:text="${#fields.hasErrors('movieEdit.year')}"  th:errors="${movieEdit.year}" class="error_text">Название фильма:</p>
         </div>
         <div class="block_text_input">
             <p class="information_text">Жанры фильмов:</p>
-            <p th:text="${#fields.hasErrors('movieEdit.genre')}"  th:errors="${movieEdit.genre}" class="information_text">Название фильма:</p>
             <input th:name="genre" th:value="${movie.genre}" class="block_text_input_input" type="text">
+            <p th:text="${#fields.hasErrors('movieEdit.genre')}"  th:errors="${movieEdit.genre}" class="error_text">Название фильма:</p>
         </div>
         <div class="block_text_input">
             <p class="information_text">Рейтинг фильма:</p>
-            <p th:text="${#fields.hasErrors('movieEdit.rating')}"  th:errors="${movieEdit.rating}" class="information_text">Название фильма:</p>
             <input th:name="rating" th:value="${movie.rating}" class="block_text_input_input" type="text">
+            <p th:text="${#fields.hasErrors('movieEdit.rating')}"  th:errors="${movieEdit.rating}" class="error_text">Название фильма:</p>
         </div>
         <div class="block_text_input">
             <p class="information_text">Актеры:</p>
